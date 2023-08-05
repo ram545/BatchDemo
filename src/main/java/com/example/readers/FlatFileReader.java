@@ -16,8 +16,8 @@ public class FlatFileReader extends FlatFileItemReader<MlbPlayerData> {
     public FlatFileReader(){
 
         this.setResource(new FileSystemResource(new File("/home/leopard/Projects/BatchDemo/src/main/resources/InputFiles/csv/mlb_players.csv")));
-        DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer(DelimitedLineTokenizer.DELIMITER_COMMA);
-        tokenizer.setNames("Name", "Team", "Position", "Height", "Weight", "Age");
+        DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
+        tokenizer.setNames(new String[]{"name", "team", "position", "height", "weight", "age"});
 
         BeanWrapperFieldSetMapper<MlbPlayerData> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(MlbPlayerData.class);

@@ -27,7 +27,7 @@ public class FlatFileWriter extends FlatFileItemWriter<MlbPlayerData> {
         });
 
         BeanWrapperFieldExtractor<MlbPlayerData> fieldExtractor = new BeanWrapperFieldExtractor<>();
-        fieldExtractor.setNames(new String[]{"Name", "Team", "Position", "Height", "Weight", "Age"});
+        fieldExtractor.setNames(new String[]{"name", "team", "position", "height", "weight", "age"});
 
         DelimitedLineAggregator<MlbPlayerData> aggregator = new DelimitedLineAggregator<>();
         aggregator.setFieldExtractor(fieldExtractor);
