@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @Configuration
@@ -28,7 +27,7 @@ public class FlatFileJob {
     @Autowired
     private FlatFileWriter csvWriter;
 
-    @Bean
+    //@Bean
     public Job csvFileJob(){
         return jobFactory.get("Flat File Batch Job")
                 .incrementer(new JobParametersIncrementer() {
