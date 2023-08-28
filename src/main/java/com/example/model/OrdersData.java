@@ -1,11 +1,12 @@
 package com.example.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -34,6 +35,7 @@ public class OrdersData {
     private String address;
     @Column
     @NonNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String orderedDate;
     @Column
     @NonNull
@@ -43,6 +45,7 @@ public class OrdersData {
     private Double amount;
     @Column
     @NonNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String deliveryDate;
 
 }
