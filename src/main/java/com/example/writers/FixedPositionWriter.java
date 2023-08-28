@@ -8,6 +8,7 @@ import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
+import org.springframework.batch.item.file.transform.FormatterLineAggregator;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ import java.time.LocalDateTime;
 public class FixedPositionWriter extends FlatFileItemWriter<OrdersData> {
 
     public FixedPositionWriter(){
-        this.setResource(new FileSystemResource(new File("/home/leopard/Projects/BatchDemo/src/main/resources/InputFiles/csv/output.csv")));
+        this.setResource(new FileSystemResource(new File("/home/leopard/Projects/BatchDemo/src/main/resources/InputFiles/txt/output.txt")));
         this.setHeaderCallback(new FlatFileHeaderCallback() {
             @Override
             public void writeHeader(Writer writer) throws IOException {
@@ -31,8 +32,9 @@ public class FixedPositionWriter extends FlatFileItemWriter<OrdersData> {
         BeanWrapperFieldExtractor<OrdersData> fieldExtractor = new BeanWrapperFieldExtractor<>();
         fieldExtractor.setNames(new String[]{"orderId", "firstName", "lastName", "age", "address", "orderedDate", "paymentMode", "amount", "deliveryDate"});
 
-        DelimitedLineAggregator<OrdersData> aggregator = new DelimitedLineAggregator<>();
+        FormatterLineAggregator<OrdersData> aggregator = new FormatterLineAggregator<>();
         aggregator.setFieldExtractor(fieldExtractor);
+        aggregator.setFormat("%5.5s%12.10s%12.10s%d%40.40s%12.10s%20.17s%8.3f%12.10s");
 
         this.setLineAggregator(aggregator);
 
