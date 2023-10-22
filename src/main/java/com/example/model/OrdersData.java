@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.sql.Date;
 
 @Getter
 @Setter
@@ -30,9 +29,11 @@ public class OrdersData {
     @Column
     @NonNull
     private Integer age;
+
     @Column
     @NonNull
     private String address;
+
     @Column
     @NonNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")

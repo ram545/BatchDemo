@@ -1,13 +1,11 @@
 package com.example.writers;
 
 
-import com.example.model.OrdersData;
-import org.hibernate.criterion.Order;
+import com.example.model.ProcessedData;
 import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
-import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.batch.item.file.transform.FormatterLineAggregator;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
@@ -18,7 +16,7 @@ import java.io.Writer;
 import java.time.LocalDateTime;
 
 @Component
-public class FixedPositionWriter extends FlatFileItemWriter<OrdersData> {
+public class FixedPositionWriter extends FlatFileItemWriter<ProcessedData> {
 
     public FixedPositionWriter(){
         this.setResource(new FileSystemResource(new File("/home/leopard/Projects/BatchDemo/src/main/resources/InputFiles/txt/output.txt")));
@@ -29,13 +27,12 @@ public class FixedPositionWriter extends FlatFileItemWriter<OrdersData> {
             }
         });
 
-        BeanWrapperFieldExtractor<OrdersData> fieldExtractor = new BeanWrapperFieldExtractor<>();
-        fieldExtractor.setNames(new String[]{"orderId", "firstName", "lastName", "age", "address", "orderedDate", "paymentMode", "amount", "deliveryDate"});
+        BeanWrapperFieldExtractor<ProcessedData> fieldExtractor = new BeanWrapperFieldExtractor<>();
+        fieldExtractor.setNames(new String[]{"orderId", "firstName", "age", "orderedDate", "paymentMode", "amount"});
 
-        FormatterLineAggregator<OrdersData> aggregator = new FormatterLineAggregator<>();
+        FormatterLineAggregator<ProcessedData> aggregator = new FormatterLineAggregator<>();
         aggregator.setFieldExtractor(fieldExtractor);
-        aggregator.setFormat("%5.5s%12.10s%12.10s%d%40.40s%12.10s%20.17s%8.3f%12.10s");
-
+        aggregator.setFormat("%5.5s%12.10s%d%12.10s%20.17s%8.3f");
         this.setLineAggregator(aggregator);
 
         this.setFooterCallback(new FlatFileFooterCallback() {

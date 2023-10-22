@@ -1,18 +1,18 @@
 package com.example.processors;
 
-import com.example.model.OrdersData;
+import com.example.model.ProcessedData;
 import com.sun.istack.NotNull;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class FixedPositionProcessor implements ItemProcessor<OrdersData, OrdersData> {
+public class FixedPositionProcessor implements ItemProcessor<ProcessedData, ProcessedData> {
 
 
     @Override
-    public OrdersData process(@NotNull OrdersData orders) throws Exception {
-
+    public ProcessedData process(@NotNull ProcessedData orders) throws Exception {
+        //System.out.println(orders.toString());
         return orders;
     }
 }
